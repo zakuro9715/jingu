@@ -13,3 +13,11 @@ Toyouke-Omikami is goddess of agriculture and industry.
 I trust that I made this compiler with power of two goddesses 
 
 so, I name jingu this project in gratitude.
+
+
+# Do you want to learn about Jingu(or Amaterasu-Omikami, Toyouke-Omikami)
+
+I show you websites about Jingu, Amaterasu-omikami, Toyouke-omikami, or Other Japanese Sinto
+
+* [Isejingu](http://www.isejingu.or.jp/english/) - Official website of Jingu
+* [Ise Grand Shrine - Wikipedia, the free encyclopedia](http://en.wikipedia.org/wiki/Ise_Grand_Shrine)
