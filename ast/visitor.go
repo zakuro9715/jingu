@@ -7,6 +7,8 @@ import (
 type Visitor interface {
 	VisitTerminal(*TerminalAST)
 	VisitWhile(*WhileAST)
+  Visit([]AST)
+  Init(int)
 }
 
 type Interpreter struct {
@@ -16,6 +18,7 @@ type Interpreter struct {
 
 func (it *Interpreter) Init(memorySize int) {
 	it.memory = make([]int, memorySize)
+  it.ptr = 0
 }
 
 func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
@@ -31,14 +34,20 @@ func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
 	case Print:
 		fmt.Printf("%c", it.memory[it.ptr])
 	case Scan:
-		fmt.Scanf("%c", &it.memory[it.ptr])
-	}
+    var str string
+		fmt.Scanln(&str)
+    fmt.Sscanf(str, "%c", &it.memory[it.ptr])
+  }
 }
 
 func (it *Interpreter) VisitWhile(tree *WhileAST) {
 	for it.memory[it.ptr] != 0 {
-		for _, child := range tree.Children {
-			child.Visit(it)
-		}
-	}
+    it.Visit(tree.Children)
+  }
+}
+
+func (it *Interpreter) Visit(asts []AST) {
+  for _, tree := range asts {
+    tree.Visit(it)
+  }
 }
