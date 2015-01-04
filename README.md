@@ -2,6 +2,67 @@
 
 jingu is brainf\*ck compiler made with golang.
 
+# Getting Started
+
+Install jingu:
+
+~~~sh
+$ go get github.com/zakuro9715/jingu
+~~~
+
+And run:
+~~~sh
+$ jingu
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+Hello world!
+~~~
+
+
+# Feature
+
+Source code from file:
+
+~~~sh
+$ jingu helloworld.bf
+Hello world
+~~~
+
+and interactive mode with -i option:
+
+~~~sh
+$ jing -i
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+Hello world
+~~~
+
+Compile:
+
+~~~sh
+$ jingu -c helloworld.bf
+$ ./a.out
+Hello world
+~~~
+
+You can compile with interactive mode:
+
+~~~sh
+$ jingu -ci
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+amaterasu
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+susanoo
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+tukuyomi
+>>> Ctrl-d
+Bye
+$ ./amaterasu.out
+Hello world
+$ ./susanoo.out
+Hello world
+$ ./tukuyomi.out
+Hello world
+~~~
+
 # Why Jingu
 
 I went to Jingu(Grand Shrine in Ise) in the day on that this project began.
