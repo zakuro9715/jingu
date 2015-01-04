@@ -35,15 +35,15 @@ func (t *TokenImpl) SetToken(token Token) {
 
 type AST interface {
 	Token() Token
-	Visit(*Visitor)
+	Visit(Visitor)
 }
 
 type TerminalAST struct {
 	TokenImpl
 }
 
-func (this *TerminalAST) Visit(v *Visitor) {
-	(*v).VisitTerminal(this)
+func (this *TerminalAST) Visit(v Visitor) {
+	v.VisitTerminal(this)
 }
 
 type WhileAST struct {
@@ -51,6 +51,6 @@ type WhileAST struct {
 	Children []AST
 }
 
-func (this *WhileAST) Visit(v *Visitor) {
-	(*v).VisitWhile(this)
+func (this *WhileAST) Visit(v Visitor) {
+	v.VisitWhile(this)
 }
