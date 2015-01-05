@@ -28,19 +28,20 @@ func (p *Parser) ParseStmt(isInWhile bool) ([]ast.AST, []error) {
 			errs = append(errs, err)
 		}
 
-		if token.Type == ast.WhileStart {
+		switch token.Type {
+    case ast.WhileStart:
 			var innerErrs []error
 			tree := &ast.WhileAST{}
 			tree.SetToken(token)
 			tree.Children, innerErrs = p.ParseStmt(true)
 			asts = append(asts, tree)
 			errs = append(errs, innerErrs...)
-		} else if token.Type == ast.WhileEnd {
+    case ast.WhileEnd:
 			if !isInWhile {
 				errs = append(errs, NewSyntaxError("Found unexpected ]", token.Line, token.Column))
 			}
 			return asts, errs
-		} else {
+    default:
 			tree := &ast.TerminalAST{}
 			tree.SetToken(token)
 			asts = append(asts, tree)
