@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"github.com/zakuro9715/jingu/ast"
 	"github.com/zakuro9715/jingu/core"
 	"github.com/zakuro9715/jingu/parser"
 	"io"
+	"io/ioutil"
 	"os"
 )
 
@@ -15,10 +17,12 @@ const (
 )
 
 const (
-  UnknownCode = -1
-	successCode = iota
+	UnknownCode = iota - 1
+	successCode
 	invalidFormatCode
 	notImplementedCode
+	readFileFailedCode
+	runErrorCode
 )
 
 func usage(exitCode int) {
@@ -66,8 +70,27 @@ func main() {
 	}
 }
 
-func runFromFile(visitor ast.Visitor, config *core.Config, path string) {
-	notImplemented()
+func runFromFile(visitor ast.Visitor, config *core.Config, filename string) {
+	b, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(readFileFailedCode)
+	}
+
+	buffer := bytes.NewBuffer(b)
+	src := buffer.String()
+
+	p := parser.Parser{}
+	p.Init(src, config)
+	asts, errs := p.Parse()
+
+	for _, err := range errs {
+		fmt.Println(err)
+		os.Exit(runErrorCode)
+	}
+
+	visitor.Init(30000, config)
+	visitor.Visit(asts)
 }
 
 func runInteractive(visitor ast.Visitor, config *core.Config) {
