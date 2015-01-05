@@ -39,6 +39,7 @@ func main() {
 	isInteractive := flag.Bool("i", false, "enable interactive mode")
 	isCompile := flag.Bool("c", false, "enable compile")
 	isUsage := flag.Bool("h", false, "display this help and exit")
+  memorySize := flag.Int("memory-size", 30000, "set available memory size")
 
 	flag.Parse()
 
@@ -55,7 +56,7 @@ func main() {
 		visitor = new(ast.Interpreter)
 	}
 
-	config := new(core.Config)
+  config := &core.Config{MemorySize: *memorySize}
 
 	if *isInteractive {
 		if len(flag.Args()) > 0 {
@@ -89,7 +90,7 @@ func runFromFile(visitor ast.Visitor, config *core.Config, filename string) {
 		os.Exit(runErrorCode)
 	}
 
-	visitor.Init(30000, config)
+	visitor.Init(config)
 	visitor.Visit(asts)
 }
 
@@ -113,7 +114,7 @@ func runInteractive(visitor ast.Visitor, config *core.Config) {
 		}
 
 		if len(errs) == 0 {
-			visitor.Init(30000, config)
+			visitor.Init(config)
 			visitor.Visit(asts)
 		}
 	}

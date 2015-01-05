@@ -9,7 +9,7 @@ type Visitor interface {
 	VisitTerminal(*TerminalAST)
 	VisitWhile(*WhileAST)
 	Visit([]AST)
-	Init(int, *core.Config)
+	Init(*core.Config)
 	Config() *core.Config
 }
 
@@ -19,8 +19,8 @@ type Interpreter struct {
 	config *core.Config
 }
 
-func (it *Interpreter) Init(memorySize int, config *core.Config) {
-	it.memory = make([]int, memorySize)
+func (it *Interpreter) Init(config *core.Config) {
+	it.memory = make([]int, config.MemorySize)
 	it.config = config
 	it.ptr = 0
 }
