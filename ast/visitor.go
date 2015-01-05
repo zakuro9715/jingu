@@ -48,6 +48,6 @@ func (it *Interpreter) VisitWhile(tree *WhileAST) {
 
 func (it *Interpreter) Visit(asts []AST) {
   for _, tree := range asts {
-    tree.Visit(it)
+    tree.Accept(it)
   }
 }
