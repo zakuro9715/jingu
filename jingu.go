@@ -15,6 +15,7 @@ const (
 )
 
 const (
+  UnknownCode = -1
 	successCode = iota
 	invalidFormatCode
 	notImplementedCode
