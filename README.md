@@ -12,28 +12,13 @@ $ go get github.com/zakuro9715/jingu
 
 And run:
 ~~~sh
-$ jingu
+$ jingu -i
 >>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
-Hello world!
+Hello world
 ~~~
 
 
 # Feature
-
-Source code from file:
-
-~~~sh
-$ jingu helloworld.bf
-Hello world
-~~~
-
-and interactive mode with -i option:
-
-~~~sh
-$ jing -i
->>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
-Hello world
-~~~
 
 Compile:
 
