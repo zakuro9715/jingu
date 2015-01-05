@@ -17,6 +17,20 @@ $ jingu -i
 Hello world
 ~~~
 
+# Usage
+
+Run from a file:
+~~~sh
+$ jingu sample/helloworld.bf
+Hello world
+~~~
+
+Or run with interactive mode:
+~~~sh
+$ jingu -i
+>>> +++++++++[>++++++++>+++++++++++>+++++<<<-]>.>++.+++++++..+++.>-.------------.<++++++++.--------.+++.------.--------.>+.>++++++++++.
+Hello world
+~~~
 
 # Feature
 
