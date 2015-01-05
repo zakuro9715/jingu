@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"fmt"
 	"github.com/zakuro9715/jingu/ast"
 	"github.com/zakuro9715/jingu/core"
 )
@@ -46,11 +45,6 @@ func (p *Parser) ParseStmt(isInWhile bool) ([]ast.AST, []error) {
 			tree.SetToken(token)
 			asts = append(asts, tree)
 		}
-
-		if token.Type == ast.Unknown {
-			errs = append(errs, NewSyntaxError(fmt.Sprintf("Found unexpected %v", token.Text), token.Line, token.Column))
-		}
-
 	}
 	if isInWhile {
 		errs = append(errs, NewSyntaxError("] is expected but EOF found.", 0, 0))
