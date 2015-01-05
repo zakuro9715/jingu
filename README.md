@@ -8,6 +8,8 @@ Install jingu:
 
 ~~~sh
 $ go get github.com/zakuro9715/jingu
+$ cd $GOPATH/src/github.com/zakuro9715/jingu
+$ go install
 ~~~
 
 And run:
