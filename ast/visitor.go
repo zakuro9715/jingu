@@ -36,9 +36,15 @@ func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
 	case PtrDec:
 		it.ptr--
 	case ValInc:
-		it.memory[it.ptr]++
+    it.memory[it.ptr]++
+		if it.memory[it.ptr] > 255 {
+      it.memory[it.ptr] -= 256
+    }
 	case ValDec:
-		it.memory[it.ptr]--
+    it.memory[it.ptr]--
+		if it.memory[it.ptr] < 0 {
+      it.memory[it.ptr] += 256
+    }
 	case Print:
 		fmt.Printf("%c", it.memory[it.ptr])
 	case Scan:
