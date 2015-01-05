@@ -31,6 +31,11 @@ func usage(exitCode int) {
 	os.Exit(exitCode)
 }
 
+func version() {
+	fmt.Printf("Jingu %v\n", core.Version())
+	os.Exit(0)
+}
+
 func notImplemented() {
 	os.Exit(notImplementedCode)
 }
@@ -39,8 +44,9 @@ func main() {
 	isInteractive := flag.Bool("i", false, "enable interactive mode")
 	isCompile := flag.Bool("c", false, "enable compile")
 	isUsage := flag.Bool("h", false, "display this help and exit")
-  memorySize := flag.Int("memory-size", 30000, "set available memory size")
-  useCircularMemory := flag.Bool("use-circular-memory", false, "use circularly linked memory")
+	isVersion := flag.Bool("v", false, "display version informtion and exit")
+	memorySize := flag.Int("memory-size", 30000, "set available memory size")
+	useCircularMemory := flag.Bool("use-circular-memory", false, "use circularly linked memory")
 
 	flag.Parse()
 
@@ -50,10 +56,14 @@ func main() {
 		usage(successCode)
 	}
 
-  config := &core.Config{
-    MemorySize: *memorySize,
-    UseCircularMemory: *useCircularMemory,
-  }
+	if *isVersion {
+		version()
+	}
+
+	config := &core.Config{
+		MemorySize:        *memorySize,
+		UseCircularMemory: *useCircularMemory,
+	}
 
 	if *isCompile {
 		fmt.Println("Sorry, I will implement soon.")
