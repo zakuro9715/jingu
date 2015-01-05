@@ -7,4 +7,5 @@ type Actor interface {
 
 type Config struct {
   MemorySize int
+  UseCircularMemory bool
 }

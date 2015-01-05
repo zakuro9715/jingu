@@ -40,6 +40,7 @@ func main() {
 	isCompile := flag.Bool("c", false, "enable compile")
 	isUsage := flag.Bool("h", false, "display this help and exit")
   memorySize := flag.Int("memory-size", 30000, "set available memory size")
+  useCircularMemory := flag.Bool("use-circular-memory", false, "use circularly linked memory")
 
 	flag.Parse()
 
@@ -49,14 +50,17 @@ func main() {
 		usage(successCode)
 	}
 
+  config := &core.Config{
+    MemorySize: *memorySize,
+    UseCircularMemory: *useCircularMemory,
+  }
+
 	if *isCompile {
 		fmt.Println("Sorry, I will implement soon.")
 		notImplemented()
 	} else {
 		visitor = new(ast.Interpreter)
 	}
-
-  config := &core.Config{MemorySize: *memorySize}
 
 	if *isInteractive {
 		if len(flag.Args()) > 0 {

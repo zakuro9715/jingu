@@ -33,8 +33,18 @@ func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
 	switch tree.Token().Type {
 	case PtrInc:
 		it.ptr++
+    if it.ptr >= it.Config().MemorySize {
+      if it.Config().UseCircularMemory {
+        it.ptr -= it.Config().MemorySize
+      }
+    }
 	case PtrDec:
 		it.ptr--
+    if it.ptr < 0 {
+      if it.Config().UseCircularMemory {
+        it.ptr += it.Config().MemorySize
+      }
+    }
 	case ValInc:
     it.memory[it.ptr]++
 		if it.memory[it.ptr] > 255 {
