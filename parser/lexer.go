@@ -2,6 +2,7 @@ package parser
 
 import (
 	"github.com/zakuro9715/jingu/ast"
+	"github.com/zakuro9715/jingu/core"
 )
 
 type Lexer struct {
@@ -9,14 +10,16 @@ type Lexer struct {
 	offset   int
 	lineHead int
 	line     int
+	config   *core.Config
 }
 
 const (
 	EOF = -1
 )
 
-func (l *Lexer) Init(src string) {
+func (l *Lexer) Init(src string, config *core.Config) {
 	l.src = []rune(src)
+	l.config = config
 }
 
 func (l *Lexer) Current() rune {

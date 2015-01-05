@@ -2,23 +2,31 @@ package ast
 
 import (
 	"fmt"
+	"github.com/zakuro9715/jingu/core"
 )
 
 type Visitor interface {
 	VisitTerminal(*TerminalAST)
 	VisitWhile(*WhileAST)
-  Visit([]AST)
-  Init(int)
+	Visit([]AST)
+	Init(int, *core.Config)
+	Config() *core.Config
 }
 
 type Interpreter struct {
 	memory []int
 	ptr    int
+	config *core.Config
 }
 
-func (it *Interpreter) Init(memorySize int) {
+func (it *Interpreter) Init(memorySize int, config *core.Config) {
 	it.memory = make([]int, memorySize)
-  it.ptr = 0
+	it.config = config
+	it.ptr = 0
+}
+
+func (it *Interpreter) Config() *core.Config {
+  return it.config
 }
 
 func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
@@ -34,20 +42,20 @@ func (it *Interpreter) VisitTerminal(tree *TerminalAST) {
 	case Print:
 		fmt.Printf("%c", it.memory[it.ptr])
 	case Scan:
-    var str string
+		var str string
 		fmt.Scanln(&str)
-    fmt.Sscanf(str, "%c", &it.memory[it.ptr])
-  }
+		fmt.Sscanf(str, "%c", &it.memory[it.ptr])
+	}
 }
 
 func (it *Interpreter) VisitWhile(tree *WhileAST) {
 	for it.memory[it.ptr] != 0 {
-    it.Visit(tree.Children)
-  }
+		it.Visit(tree.Children)
+	}
 }
 
 func (it *Interpreter) Visit(asts []AST) {
-  for _, tree := range asts {
-    tree.Accept(it)
-  }
+	for _, tree := range asts {
+		tree.Accept(it)
+	}
 }
